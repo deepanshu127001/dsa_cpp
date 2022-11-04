@@ -34,7 +34,7 @@ public:
         }
     }
 //define a method to insert a new element at specified index
-    void insertElement(int idx,int item){
+    int insertElement(int idx,int item){
         
     }
 //defina a method to edit an element at specified index
@@ -72,7 +72,7 @@ public:
 //define a destructor to deallocate the memory of an array
     ~Array(){
         // cout<<"memory freed";
-        delete ptr;
+        delete []ptr;
     }
 //define a method to find an element in the array . Return index if the element found otherwise return -1
     int findElement(int item){
@@ -102,6 +102,7 @@ int main(int argc, char const *argv[])
     arr.appendElement(34);
     arr.editElement(0,12);
     arr.traverseArray();
+
 // cout<<endl<<arr.isFull();
 // cout<<endl<<arr.isEmpty()<<endl;
 //     if(arr.findElement(34))
