@@ -1,48 +1,48 @@
 #include <iostream>
-class Node
+class SLL
 {
     int data;
-    Node *next;
+    SLL *next;
 
 public:
-    Node *start = NULL;
+    SLL *start = NULL;
 
-    Node *createNode();
+    SLL *createSLL();
     void push_front(int);
     void push_back(int);
     int pop_front();
     int pop_back();
     int isEmpty();
-    ~Node();
+    ~SLL();
     void Traverse();
 
 };
-void Node::Traverse(){
+void SLL::Traverse(){
     if(isEmpty()){
         std::cout<<"\nList is empty ";
         return ;
     }
-    Node *temp=start;
+    SLL *temp=start;
     while(temp!=NULL){
         std::cout<<temp->data<<" ";
         temp=temp->next;
     }
 }
-Node::~Node(){
+SLL::~SLL(){
     if(!isEmpty()){
         while(start!=NULL){
             pop_front();
         }
     }
 }
-int Node::isEmpty(){
+int SLL::isEmpty(){
     if(start==NULL){
         return 1;
     }
     return 0;
 }
 // removes the element from the front and returns the value
-int Node::pop_front()
+int SLL::pop_front()
 {
     if (start == NULL)
     {
@@ -51,14 +51,14 @@ int Node::pop_front()
     }
     else
     {
-        Node *temp = start;
+        SLL *temp = start;
         start = start->next;
         int val = temp->data;
         delete temp;
         return val;
     }
 }
-int Node::pop_back()
+int SLL::pop_back()
 {
     if (start == NULL)
     {
@@ -75,7 +75,7 @@ int Node::pop_back()
             start = NULL;
             return value;
         }
-        Node *temp = start;
+        SLL *temp = start;
         while (temp->next->next != NULL)
         {
             temp = temp->next;
@@ -86,9 +86,9 @@ int Node::pop_back()
         return value;
     }
 }
-void Node::push_front(int value)
+void SLL::push_front(int value)
 {
-    Node *ptr = createNode();
+    SLL *ptr = createSLL();
     ptr->data = value;
     ptr->next = start;
     if (start == NULL)
@@ -102,9 +102,9 @@ void Node::push_front(int value)
         start = ptr;
     }
 }
-void Node::push_back(int value)
+void SLL::push_back(int value)
 {
-    Node *ptr = createNode();
+    SLL *ptr = createSLL();
     ptr->data = value;
     ptr->next = NULL;
     if (start == NULL)
@@ -114,7 +114,7 @@ void Node::push_back(int value)
     }
     else
     {
-        Node *temp = start;
+        SLL *temp = start;
         while (temp->next != NULL)
         {
             temp = temp->next;
@@ -122,14 +122,14 @@ void Node::push_back(int value)
         temp->next = ptr;
     }
 }
-Node *Node::createNode()
+SLL *SLL::createSLL()
 {
-    Node *temp = (Node *)new Node;
+    SLL *temp = (SLL *)new SLL;
     return temp;
 }
 int main(int argc, char const *argv[])
 {
-    Node n;
+    SLL n;
     n.push_back(23);
     n.push_back(24);
     n.push_back(25);
