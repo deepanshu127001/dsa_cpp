@@ -10,14 +10,14 @@ public:
     {
         start = nullptr;
     }
-    SLL *createSLL();
+    SLL *createNode();
     void push_front(int);
     void push_back(int);
     int pop_front();
     int pop_back();
     int isEmpty();
     int search(int);
-    void push_after(int);
+    void push_after(int,int);
     void pop_after(int);
     ~SLL();
     void traverse();
@@ -32,16 +32,43 @@ int SLL::countNodes(){
     }
     return count;
 }
-void SLL::push_after(int idx)
+void SLL::push_after(int value,int idx)
 {
-    int countOfNodes=countNodes();
-    if(idx>=0&&idx<countOfNodes)
-    for(int i=0;i<countOfNodes;i++){
-
+    int count=countNodes();
+    SLL *newNode=createNode();
+    newNode->data=value;
+    newNode->next=NULL;
+    if(count>0&&idx<count){
+            SLL *slow=start;
+            SLL*fast=slow->next;
+        for(int i=0;i<idx;i++){
+            slow=fast;
+            fast=fast->next;
+        }
+        newNode->next=fast;
+        slow->next=newNode;
+    }
+    else{
+        std::cout<<"\n invalid index";
     }
 }
 void SLL::pop_after(int idx)
 {
+
+    if(idx>0&&idx<countNodes()){
+        SLL *slow=start,*fast=slow->next;
+        for (int i = 0; i <idx; i++)
+        {
+            std::cout<<"moving forward";
+            slow=fast;
+            fast=fast->next;
+        }
+        slow->next=fast->next;
+        delete fast;
+    }
+    else{
+        std::cout<<"\ninvalid index";
+    }
 }
 int SLL::search(int value)
 {
@@ -135,7 +162,7 @@ int SLL::pop_back()
 }
 void SLL::push_front(int value)
 {
-    SLL *ptr = createSLL();
+    SLL *ptr = createNode();
     ptr->data = value;
     ptr->next = start;
     if (start == nullptr)
@@ -151,7 +178,7 @@ void SLL::push_front(int value)
 }
 void SLL::push_back(int value)
 {
-    SLL *ptr = createSLL();
+    SLL *ptr = createNode();
     ptr->data = value;
     ptr->next = nullptr;
     if (start == nullptr)
@@ -169,7 +196,7 @@ void SLL::push_back(int value)
         temp->next = ptr;
     }
 }
-SLL *SLL::createSLL()
+SLL *SLL::createNode()
 {
     SLL *temp = (SLL *)new SLL;
     return temp;
@@ -177,9 +204,13 @@ SLL *SLL::createSLL()
 int main(int argc, char const *argv[])
 {
     SLL n;
-    n.push_back(23);
-    std::cout << n.search(23);
+    n.push_back(1);
+    n.push_back(2);
+    n.push_back(3);
+    n.push_back(4);
+    n.push_after(50,1);
     n.traverse();
-
+    n.pop_after(2);
+    n.traverse();
     return 0;
 }
