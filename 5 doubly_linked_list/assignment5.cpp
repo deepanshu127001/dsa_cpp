@@ -19,8 +19,13 @@ public:
   void deleteSpecificNode(Node *);
   Node *createNode(int data);
   void traverse();
-  // ~DLL();
+  ~DLL();
 };
+DLL::~DLL(){
+  while(start){
+    deleteFromBeg();
+  }
+}
 DLL::DLL() { start = nullptr; }
 Node *DLL::createNode(int data) {
   Node *node = new Node;
