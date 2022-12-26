@@ -89,6 +89,7 @@ void DLL::insertAfter(Node *node, int data) {
     if (traverser != nullptr) {
       new_node->prev = traverser;
       new_node->next = traverser->next;
+      if(traverser->next)//if(traverser->next!=null)
       traverser->next->prev = new_node;
       traverser->next = new_node;
     } else {
@@ -137,19 +138,17 @@ void DLL::deleteFromBeg() {
   }
 }
 void DLL::deleteSpecificNode(Node *node_to_be_deleted){
-  if(node_to_be_deleted==nullptr){
-    std::cout<<"\nnode can't be deleted";
+ Node *temp=start;
+  while(temp!=node_to_be_deleted){
+    temp=temp->next;
   }
-  else{
-    Node *temp=start;
-    while(temp->next!=node_to_be_deleted){
-      temp=temp->next;
-    }
-    Node *r=temp->next;
-    temp->next=r->next;
-    r->next->prev=temp;
-    delete r;
-  }
+  if(temp->prev)
+    temp->prev->next=temp->next;
+  else
+    start=temp->next;
+  if(temp->next)
+    temp->next->prev=temp->prev;
+  delete temp;
 }
 int main() {
   DLL l1;
@@ -164,7 +163,7 @@ int main() {
   l1.deleteFromEnd();
   l1.traverse();
   // l1.deleteFromBeg();
-  l1.deleteSpecificNode(l1.search(2));
+  l1.deleteSpecificNode(l1.search(300));
   l1.traverse();
   return 0;
 }
