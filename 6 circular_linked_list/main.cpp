@@ -10,7 +10,7 @@ class CircularList{
   void insertAtBeg(int);
   void insertAtLast(int);
   void traverse();
-  bool search (int);
+  Node* search (int);
 };
 CircularList::CircularList(){
   last = nullptr;
@@ -54,19 +54,19 @@ void CircularList::traverse(){
     
   }
 }
-bool CircularList::search(int data){
+Node* CircularList::search(int data){
   if(last){
     Node *temp=last;
     do
     {
       if(temp->data == data)
       {
-        return true;
+        return temp;
       }
       temp=temp->next;
     } while(temp!=last);
   }
-  return false;
+  return nullptr;
 }
 
 int main(){
@@ -79,6 +79,6 @@ int main(){
   c1.insertAtLast(6);
   c1.insertAtLast(7);
   c1.insertAtLast(8);
-  std::cout<<c1.search(45);
+  Node *temp=c1.search(3);
 //   c1.traverse();
 }
