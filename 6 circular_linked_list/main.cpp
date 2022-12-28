@@ -11,7 +11,18 @@ class CircularList{
   void insertAtLast(int);
   void traverse();
   Node* search (int);
+  void insertAfter(Node*,int);
 };
+void CircularList::insertAfter(Node *temp,int data){
+     Node *node=new Node;
+     node->data = data;
+     if(last){
+      node->next=temp->next;
+      temp->next=node;
+      if(temp == last )
+        last =node;
+     }
+}
 CircularList::CircularList(){
   last = nullptr;
 }
@@ -79,6 +90,6 @@ int main(){
   c1.insertAtLast(6);
   c1.insertAtLast(7);
   c1.insertAtLast(8);
-  Node *temp=c1.search(3);
-//   c1.traverse();
+  c1.insertAfter(c1.search(8),345);
+  c1.traverse();
 }
