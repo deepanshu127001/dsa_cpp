@@ -49,6 +49,21 @@ void CDLL::insertAtBegining(int data){
         start=node;
     }
 }
+void CDLL::insertAtEnd(int data){
+     Node *node=new Node;
+    node -> data = data;
+    if(start==nullptr){
+        node->prev=node;
+        node->next=node;
+        start = node;
+    }
+    else{
+        node->next =start;
+        node->prev=start->prev;
+        start->prev->next=node;
+        start->prev = node;
+    }
+}
 int main(int argc, char const *argv[])
 {
     CDLL l1;
@@ -56,7 +71,8 @@ int main(int argc, char const *argv[])
     l1.insertAtBegining(4);
     l1.insertAtBegining(3);
     l1.insertAtBegining(2);
-    l1.insertAtBegining(1);
+    l1.insertAtBegining(1); 
+    l1.insertAtEnd(6);
     l1.traverse();
     return 0;
 }
