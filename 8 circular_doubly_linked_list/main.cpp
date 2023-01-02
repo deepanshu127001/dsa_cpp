@@ -64,6 +64,22 @@ void CDLL::insertAtEnd(int data){
         start->prev = node;
     }
 }
+Node* CDLL::search(int data){
+    Node *temp=start;
+    if(start==nullptr){
+        std::cout<<"list is empty nothing to search";
+        return nullptr;
+    }
+    do{
+        if(temp->data==data){
+            return temp;
+        }
+        temp=temp->next;
+    }while (temp!=start);
+    std::cout<<"value no found ";
+    return nullptr;
+    
+}
 int main(int argc, char const *argv[])
 {
     CDLL l1;
@@ -74,5 +90,6 @@ int main(int argc, char const *argv[])
     l1.insertAtBegining(1); 
     l1.insertAtEnd(6);
     l1.traverse();
+    l1.search(3);//returns address of 3 in node 
     return 0;
 }
