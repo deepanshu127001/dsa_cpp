@@ -106,8 +106,22 @@ void CDLL::insertAfter(Node *temp, int data)
         node->data = data;
         node->prev = temp;
         node->next = temp->next;
-        temp->next->prev=node;
+        temp->next->prev = node;
         temp->next = node;
+    }
+}
+void CDLL::deleteFirst()
+{
+    if(start->next==start){
+        delete start;
+        start=nullptr;
+    }
+    else{
+        Node *temp=start;
+        temp->prev->next=temp->next;
+        temp->prev=temp->next;
+        start=temp->next;
+        delete temp;
     }
 }
 int main(int argc, char const *argv[])
@@ -121,6 +135,7 @@ int main(int argc, char const *argv[])
     l1.insertAtEnd(6);
     l1.insertAfter(l1.search(6), 300);
     l1.insertAtEnd(301);
+    l1.deleteFirst();
     l1.traverse();
     // l1.search(3);//returns address of 3 in node
     return 0;
