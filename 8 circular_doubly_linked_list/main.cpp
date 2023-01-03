@@ -112,15 +112,20 @@ void CDLL::insertAfter(Node *temp, int data)
 }
 void CDLL::deleteFirst()
 {
-    if(start->next==start){
-        delete start;
-        start=nullptr;
-    }
-    else{
-        Node *temp=start;
-        temp->prev->next=temp->next;
-        temp->prev=temp->next;
-        start=temp->next;
+
+    if (start)
+    {
+        Node *temp = start;
+        temp->next->prev = temp->prev;
+        temp->prev->next = temp->next;
+        if (start->next == start)
+        {
+            start = nullptr;
+        }
+        else
+        {
+            start = temp->next;
+        }
         delete temp;
     }
 }
