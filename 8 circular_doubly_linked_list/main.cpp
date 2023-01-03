@@ -21,6 +21,24 @@ public:
     void traverse();
     // ~CDLL();
 };
+void CDLL::deleteLast(){
+    if(start==nullptr){
+        std::cout<<"list is empty";
+        return;
+    }
+    if(start->next==start&&start->prev==start){
+    delete start;
+    std::cout<<"item deleted";
+    start=nullptr;
+    return ;
+    }
+    else{
+    Node *temp=start->prev;
+    temp->prev->next=start;
+    temp->next->prev=temp->prev;
+    delete temp;
+    }
+}
 void CDLL::traverse()
 {
     if (start == nullptr)
@@ -132,15 +150,21 @@ void CDLL::deleteFirst()
 int main(int argc, char const *argv[])
 {
     CDLL l1;
-    l1.insertAtBegining(5);
-    l1.insertAtBegining(4);
-    l1.insertAtBegining(3);
-    l1.insertAtBegining(2);
-    l1.insertAtBegining(1);
+    // l1.insertAtBegining(5);
+    // l1.insertAtBegining(4);
+    // l1.insertAtBegining(3);
+    // l1.insertAtBegining(2);
+    // l1.insertAtBegining(1);
     l1.insertAtEnd(6);
-    l1.insertAfter(l1.search(6), 300);
-    l1.insertAtEnd(301);
-    l1.deleteFirst();
+    l1.insertAtEnd(6);
+    l1.insertAtEnd(6);
+    // l1.insertAfter(l1.search(6), 300);
+    // l1.insertAtEnd(301);
+    // l1.deleteFirst();
+    // l1.deleteLast();
+    l1.deleteLast(); 
+    l1.deleteLast();
+    // l1.insertAtBegining(1);
     l1.traverse();
     // l1.search(3);//returns address of 3 in node
     return 0;
