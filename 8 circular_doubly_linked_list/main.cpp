@@ -22,21 +22,17 @@ public:
     // ~CDLL();
 };
 void CDLL::deleteLast(){
-    if(start==nullptr){
-        std::cout<<"list is empty";
-        return;
-    }
-    if(start->next==start&&start->prev==start){
-    delete start;
-    std::cout<<"item deleted";
-    start=nullptr;
-    return ;
-    }
-    else{
-    Node *temp=start->prev;
-    temp->prev->next=start;
-    temp->next->prev=temp->prev;
-    delete temp;
+    if(start){
+        Node *temp=start->prev;
+        if(start->prev==start){
+            delete start ;
+            start = nullptr;
+        }else{
+
+        temp->prev->next=start;
+        start->prev=temp->prev;
+        delete temp;
+        }
     }
 }
 void CDLL::traverse()
