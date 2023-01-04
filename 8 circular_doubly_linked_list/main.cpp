@@ -17,21 +17,53 @@ public:
     void insertAfter(Node *, int);
     void deleteFirst();
     void deleteLast();
-    void deleteNode(Node *);
+    void deleteSpecificNode(Node *);
     void traverse();
-    // ~CDLL();
+    ~CDLL();
 };
-void CDLL::deleteLast(){
-    if(start){
-        Node *temp=start->prev;
-        if(start->prev==start){
-            delete start ;
+CDLL::~CDLL()
+{
+    while (start)
+    {
+        deleteFirst();
+    }
+}
+void CDLL::deleteSpecificNode(Node *temp)
+{
+    if (temp)
+    {
+        if (start == start->next) // if there's only a single node in the last
+        {
             start = nullptr;
-        }else{
-
-        temp->prev->next=start;
-        start->prev=temp->prev;
+        }
+        else
+        {
+            temp->prev->next = temp->next;
+            temp->next->prev = temp->prev;
+            if (start == temp)
+            { // if the node is first node
+                start = temp->next;
+            }
+        }
         delete temp;
+    }
+}
+void CDLL::deleteLast()
+{
+    if (start)
+    {
+        Node *temp = start->prev;
+        if (start->prev == start)
+        {
+            delete start;
+            start = nullptr;
+        }
+        else
+        {
+
+            temp->prev->next = start;
+            start->prev = temp->prev;
+            delete temp;
         }
     }
 }
@@ -146,11 +178,11 @@ void CDLL::deleteFirst()
 int main(int argc, char const *argv[])
 {
     CDLL l1;
-    // l1.insertAtBegining(5);
-    // l1.insertAtBegining(4);
-    // l1.insertAtBegining(3);
-    // l1.insertAtBegining(2);
-    // l1.insertAtBegining(1);
+    l1.insertAtBegining(5);
+    l1.insertAtBegining(4);
+    l1.insertAtBegining(3);
+    l1.insertAtBegining(2);
+    l1.insertAtBegining(1);
     l1.insertAtEnd(6);
     l1.insertAtEnd(6);
     l1.insertAtEnd(6);
@@ -158,8 +190,9 @@ int main(int argc, char const *argv[])
     // l1.insertAtEnd(301);
     // l1.deleteFirst();
     // l1.deleteLast();
-    l1.deleteLast(); 
     l1.deleteLast();
+    l1.deleteLast();
+    l1.deleteSpecificNode(l1.search(1));
     // l1.insertAtBegining(1);
     l1.traverse();
     // l1.search(3);//returns address of 3 in node
