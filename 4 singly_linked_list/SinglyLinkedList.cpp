@@ -1,10 +1,10 @@
 #include <iostream>
 class SLL
 {
-    int data;
-    SLL *next;
 
 public:
+    int data;
+    SLL *next;
     SLL *start;
     SLL()
     {
@@ -22,7 +22,11 @@ public:
     ~SLL();
     void traverse();
     int countNodes();
+    SLL* getHead();
 };
+SLL* SLL::getHead(){
+    return start;
+}
 int SLL::countNodes(){
     SLL *temp=start;
     int count=0;
