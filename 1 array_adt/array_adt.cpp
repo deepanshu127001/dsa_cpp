@@ -21,7 +21,30 @@ public:
     int getCountOfElements();
     // Destructor
     ~Array();
+    Array(Array&);
+    int getCapacity();
+    void operator = (Array&);
 };
+void Array::operator=(Array &arr){
+    capacity = arr.capacity;
+    lastIndex = arr.lastIndex;
+    delete ptr;
+    ptr = new int [capacity];
+    for(int i=0 ;i<=lastIndex;i++){
+        ptr[i]=arr.ptr[i];
+    }
+}
+int Array::getCapacity(){
+    return capacity;
+}
+Array::Array(Array &arr){
+    lastIndex = arr.lastIndex;
+    capacity = arr.capacity;
+    ptr = new int[capacity];
+    for(int i = 0  ;i<= lastIndex;i++){
+        ptr[i]= arr.ptr[i];
+    }
+}
 Array::~Array()
 {
     delete[] ptr;
@@ -170,16 +193,17 @@ void Array::traverseArray()
         std::cout << ptr[i] << " ";
     }
 }
-int main(int argc, char const *argv[])
-{
-    Array arr(7);
-    arr.appendElement(10);
-    arr.insertElement(1, 20);
-    arr.deleteElement(0);
-    arr.findElement(10);
-    std::cout << arr.isEmpty();
-    std::cout << arr.isFull();
-    arr.editElement(0, 400);
-    arr.traverseArray();
-    return 0;
-}
+// int main(int argc, char const *argv[])
+// {
+//     Array arr(7);
+//     arr.appendElement(10);
+//     arr.insertElement(1, 20);
+//     arr.deleteElement(0);
+//     arr.findElement(10);
+//     std::cout << arr.isEmpty();
+//     std::cout << arr.isFull();
+//     arr.editElement(0, 400);
+//     arr.traverseArray();
+
+//     return 0;
+// }
